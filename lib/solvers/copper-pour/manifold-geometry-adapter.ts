@@ -185,7 +185,7 @@ export const removeUnconnectedIslands = (
   const islands = section.decompose().filter((island) => {
     const overlap = runManifoldOperation(
       "removeUnconnectedIslands.intersect",
-      toScaledManifoldPolygons([], "removeUnconnectedIslands.intersect"),
+      [...island.toPolygons(), ...anchorSection.toPolygons()],
       () => island.intersect(anchorSection),
     )
     return !overlap.isEmpty() && overlap.area() > minScaledOverlap
